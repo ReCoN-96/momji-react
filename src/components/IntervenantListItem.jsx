@@ -13,7 +13,7 @@ const IntervenantListItem = ({
     <Td>{profile.lastName}</Td>
     <Td>{email}</Td>
     <Td>{address}</Td>
-    <Td>{moment(registered).isValid() ? moment(registered).format('L') : 'unknow'}</Td>
+    <Td>{moment(registered).isValid() ? moment(registered).format('DD/MM/YYYY') : ''}</Td>
     <Td>
       {`${isActive}`}
     </Td>
