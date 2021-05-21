@@ -1,5 +1,7 @@
-import { Box } from '@chakra-ui/react';
+import { Container } from '@chakra-ui/react';
 
-const IntervenantEditPage = () => <Box>yo</Box>;
+import IntervenantForm from './IntervenantForm';
+
+const IntervenantEditPage = () => <Container maxWidth="container.lg" centerContent><IntervenantForm /></Container>;
 
 export default IntervenantEditPage;
