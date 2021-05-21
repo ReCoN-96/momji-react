@@ -6,9 +6,9 @@ import {
 import moment from 'moment';
 
 const IntervenantListItem = ({
-  id, profile, email, address, registered, isActive,
+  profile, email, address, registered, isActive,
 }) => (
-  <Tr key={id}>
+  <Tr>
     <Td>{profile.firstName}</Td>
     <Td>{profile.lastName}</Td>
     <Td>{email}</Td>
