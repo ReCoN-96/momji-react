@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-boolean-value */
+/* eslint-disable react/jsx-props-no-spreading */
 import {
   FormControl,
   FormLabel,
@@ -8,38 +10,63 @@ import {
   Box,
   Button,
 } from '@chakra-ui/react';
+import { useForm, Controller } from 'react-hook-form';
 
-const IntervenantForm = () => (
-  <Box w="50%" p={6} border="1px" borderColor="gray.200" borderRadius="40px">
-    <FormControl>
-      <FormLabel>First name</FormLabel>
-      <Input mb={2} type="text" />
+const IntervenantForm = () => {
+  const {
+    register, handleSubmit, control,
+  } = useForm();
 
-      <FormLabel>Last name</FormLabel>
-      <Input mb={2} type="text" />
+  const onSubmit = (data) => console.log(data);
 
-      <FormLabel>Email address</FormLabel>
-      <Input mb={2} type="email" />
+  return (
+    <Box w="50%" p={6} border="1px" borderColor="gray.200" borderRadius="40px">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormControl>
+          <FormLabel>First name</FormLabel>
+          <Input mb={2} type="text" defaultValue="test" {...register('profile.firstName')} />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Last name</FormLabel>
+          <Input mb={2} type="text" defaultValue="test" {...register('profile.lastName')} />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Email address</FormLabel>
+          <Input mb={2} type="text" defaultValue="test" {...register('email')} />
+        </FormControl>
 
-      <FormLabel>Home Address</FormLabel>
-      <Input mb={2} type="text" />
+        <FormControl>
+          <FormLabel>Home Address</FormLabel>
+          <Input mb={2} type="text" defaultValue="test" {...register('adress')} />
+        </FormControl>
 
-      <FormLabel>Are you active ?</FormLabel>
-      <RadioGroup mb={2} defaultValue="2">
-        <Stack spacing={5} direction="row">
-          <Radio colorScheme="red" value="1">
-            Yes
-          </Radio>
-          <Radio colorScheme="green" value="2">
-            No
-          </Radio>
-        </Stack>
-      </RadioGroup>
-      <Box display="flex" justifyContent="flex-end">
-        <Button colorScheme="blue">Save</Button>
-      </Box>
-    </FormControl>
-  </Box>
-);
+        <FormControl>
+          <FormLabel>Are you active ?</FormLabel>
+          <Controller
+            name="isActive"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <RadioGroup mb={2} value={value} onChange={(e) => onChange(e === 'true')}>
+                <Stack spacing={5} direction="row">
+                  <Radio colorScheme="blue" value={true}>
+                    Yes
+                  </Radio>
+                  <Radio colorScheme="orange" value={false}>
+                    No
+                  </Radio>
+                </Stack>
+              </RadioGroup>
+            )}
+          />
+        </FormControl>
+
+        <Box display="flex" justifyContent="flex-end">
+          <Button type="submit" colorScheme="blue">Save</Button>
+        </Box>
+      </form>
+    </Box>
+
+  );
+};
 
 export default IntervenantForm;
