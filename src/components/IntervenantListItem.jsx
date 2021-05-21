@@ -1,4 +1,5 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react/forbid-prop-types */
+import PropTypes from 'prop-types';
 import {
   Tr,
   Td,
@@ -19,5 +20,13 @@ const IntervenantListItem = ({
     </Td>
   </Tr>
 );
+
+IntervenantListItem.propTypes = {
+  profile: PropTypes.object.isRequired,
+  email: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  registered: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
+};
 
 export default IntervenantListItem;

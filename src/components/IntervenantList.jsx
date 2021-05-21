@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useContext, useState } from 'react';
 import moment from 'moment';
@@ -67,6 +66,7 @@ const IntervenantListComponent = () => {
               }
               return moment(a.registered) < moment(b.registered) ? 1 : -1;
             }).map((props) => (
+              // eslint-disable-next-line react/prop-types
               <IntervenantListItem key={props.id} {...props} />
             ))}
         </Tbody>
