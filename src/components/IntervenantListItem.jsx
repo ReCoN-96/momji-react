@@ -1,13 +1,17 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 /* eslint-disable react/forbid-prop-types */
 import PropTypes from 'prop-types';
 import {
   Tr,
   Td,
 } from '@chakra-ui/react';
+import { EditIcon } from '@chakra-ui/icons';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const IntervenantListItem = ({
-  profile, email, address, registered, isActive,
+  id, profile, email, address, registered, isActive,
 }) => (
   <Tr>
     <Td>{profile.firstName}</Td>
@@ -18,10 +22,14 @@ const IntervenantListItem = ({
     <Td>
       {`${isActive}`}
     </Td>
+    <Td>
+      <Link to={`/edit/${id}`}><EditIcon /></Link>
+    </Td>
   </Tr>
 );
 
 IntervenantListItem.propTypes = {
+  id: PropTypes.string.isRequired,
   profile: PropTypes.object.isRequired,
   email: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,

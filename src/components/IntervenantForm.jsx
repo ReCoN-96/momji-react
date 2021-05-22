@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-boolean-value */
 /* eslint-disable react/jsx-props-no-spreading */
 import {
@@ -12,7 +13,9 @@ import {
 } from '@chakra-ui/react';
 import { useForm, Controller } from 'react-hook-form';
 
-const IntervenantForm = () => {
+const IntervenantForm = ({
+  profile, email, address, isActive,
+}) => {
   const {
     register, handleSubmit, control,
   } = useForm();
@@ -24,26 +27,27 @@ const IntervenantForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
           <FormLabel>First name</FormLabel>
-          <Input mb={2} type="text" defaultValue="test" {...register('profile.firstName')} />
+          <Input mb={2} type="text" defaultValue={profile?.firstName || ''} {...register('profile.firstName')} />
         </FormControl>
         <FormControl>
           <FormLabel>Last name</FormLabel>
-          <Input mb={2} type="text" defaultValue="test" {...register('profile.lastName')} />
+          <Input mb={2} type="text" defaultValue={profile?.lastName || ''} {...register('profile.lastName')} />
         </FormControl>
         <FormControl>
           <FormLabel>Email address</FormLabel>
-          <Input mb={2} type="text" defaultValue="test" {...register('email')} />
+          <Input mb={2} type="text" defaultValue={email || ''} {...register('email')} />
         </FormControl>
 
         <FormControl>
           <FormLabel>Home Address</FormLabel>
-          <Input mb={2} type="text" defaultValue="test" {...register('adress')} />
+          <Input mb={2} type="text" defaultValue={address || ''} {...register('adress')} />
         </FormControl>
 
         <FormControl>
           <FormLabel>Are you active ?</FormLabel>
           <Controller
             name="isActive"
+            defaultValue={isActive || ''}
             control={control}
             render={({ field: { onChange, value } }) => (
               <RadioGroup mb={2} value={value} onChange={(e) => onChange(e === 'true')}>
