@@ -18,7 +18,15 @@ const IntervenantForm = ({
 }) => {
   const {
     register, handleSubmit, control,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      'profile.firstName': profile?.firstName || '',
+      'profile.lastName': profile?.lastName || '',
+      email: email || '',
+      address: address || '',
+      isActive: isActive || false,
+    },
+  });
 
   const onSubmit = (data) => console.log(data);
 
@@ -40,14 +48,14 @@ const IntervenantForm = ({
 
         <FormControl>
           <FormLabel>Home Address</FormLabel>
-          <Input mb={2} type="text" defaultValue={address || ''} {...register('adress')} />
+          <Input mb={2} type="text" defaultValue={address || ''} {...register('address')} />
         </FormControl>
 
         <FormControl>
           <FormLabel>Are you active ?</FormLabel>
           <Controller
             name="isActive"
-            defaultValue={isActive || ''}
+            defaultValue={isActive || false}
             control={control}
             render={({ field: { onChange, value } }) => (
               <RadioGroup mb={2} value={value} onChange={(e) => onChange(e === 'true')}>
