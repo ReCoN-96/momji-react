@@ -1,13 +1,21 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
 import { Container } from '@chakra-ui/react';
+import { useContext } from 'react';
 
 import IntervenantForm from './IntervenantForm';
+import { IntervenantContext } from '../contexts/IntervenantContext';
 
 const IntervenantEditPage = ({ match }) => {
-  console.log(match.params.id);
+  const {
+    records,
+  } = useContext(IntervenantContext);
+
+  const Intervenant = records.find((data) => data.id === match.params.id);
+
   return (
     <Container maxWidth="container.lg" centerContent>
-      <IntervenantForm />
+      <IntervenantForm {...Intervenant} />
     </Container>
   );
 };
