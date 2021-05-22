@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
-import { shallow } from 'enzyme';
+import { BrowserRouter as Router } from 'react-router-dom';
+import renderer from 'react-test-renderer';
 import Header from '../../components/Header';
 
-it('should render Header correctly', () => {
-  const wrapper = shallow(<Header />);
+test('should render Header correctly', () => {
+  const wrapper = renderer.create(<Router><Header /></Router>).toJSON();
   expect(wrapper).toMatchSnapshot();
 });
