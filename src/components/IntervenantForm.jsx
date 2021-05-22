@@ -35,20 +35,20 @@ const IntervenantForm = ({
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
           <FormLabel>First name</FormLabel>
-          <Input mb={2} type="text" defaultValue={profile?.firstName || ''} {...register('profile.firstName')} />
+          <Input mb={2} type="text" defaultValue={profile?.firstName || ''} {...register('profile.firstName', { required: true })} />
         </FormControl>
         <FormControl>
           <FormLabel>Last name</FormLabel>
-          <Input mb={2} type="text" defaultValue={profile?.lastName || ''} {...register('profile.lastName')} />
+          <Input mb={2} type="text" defaultValue={profile?.lastName || ''} {...register('profile.lastName', { required: true })} />
         </FormControl>
         <FormControl>
           <FormLabel>Email address</FormLabel>
-          <Input mb={2} type="text" defaultValue={email || ''} {...register('email')} />
+          <Input mb={2} type="email" defaultValue={email || ''} {...register('email', { required: true })} />
         </FormControl>
 
         <FormControl>
           <FormLabel>Home Address</FormLabel>
-          <Input mb={2} type="text" defaultValue={address || ''} {...register('address')} />
+          <Input mb={2} type="text" defaultValue={address || ''} {...register('address', { required: true })} />
         </FormControl>
 
         <FormControl>

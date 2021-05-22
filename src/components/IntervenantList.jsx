@@ -7,12 +7,14 @@ import {
   Tbody,
   Tr,
   Th,
+  Td,
   Text,
   Flex,
 } from '@chakra-ui/react';
 import { ArrowUpDownIcon } from '@chakra-ui/icons';
 
-import { IntervenantContext, IntervenantProvider } from '../contexts/IntervenantContext';
+import { IntervenantContext } from '../contexts/IntervenantContext';
+import { REQUEST_STATUS } from '../reducers/request';
 
 import IntervenantListItem from './IntervenantListItem';
 import IntervenantSearchBar from './IntervenantSearchBar';
@@ -20,11 +22,16 @@ import IntervenantSearchBar from './IntervenantSearchBar';
 const IntervenantListComponent = () => {
   const {
     records,
+    status,
+    error,
   } = useContext(IntervenantContext);
 
   const [searchQuery, setSearchQuery] = useState('');
-  // eslint-disable-next-line no-unused-vars
   const [sortByDate, setSortByDate] = useState(true);
+
+  const success = status === REQUEST_STATUS.SUCCESS;
+  const isLoading = status === REQUEST_STATUS.LOADING;
+  const hasErrored = status === REQUEST_STATUS.ERROR;
 
   return (
     <>
@@ -54,31 +61,45 @@ const IntervenantListComponent = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {records && records
-            .filter((rec) => {
-              const targetString = `${rec.profile.firstName} ${rec.profile.lastName}`.toLowerCase();
-              return searchQuery.length === 0
-                ? true
-                : targetString.includes(searchQuery.toLowerCase());
-            }).sort((a, b) => {
-              if (!sortByDate) {
-                return moment(a.registered) > moment(b.registered) ? 1 : -1;
-              }
-              return moment(a.registered) < moment(b.registered) ? 1 : -1;
-            }).map((props) => (
+          {isLoading && (
+          <Tr>
+            <Td>Loading...</Td>
+          </Tr>
+          ) }
+          {hasErrored && (
+          <Tr>
+            <Td>
+              Loading error...
+            </Td>
+            <Td>
+              ERROR:
+              {error.message}
+            </Td>
+          </Tr>
+          )}
+          {success && (
+          <>
+            {records && records
+              .filter((rec) => {
+                const targetString = `${rec.profile.firstName} ${rec.profile.lastName}`.toLowerCase();
+                return searchQuery.length === 0
+                  ? true
+                  : targetString.includes(searchQuery.toLowerCase());
+              }).sort((a, b) => {
+                if (!sortByDate) {
+                  return moment(a.registered) > moment(b.registered) ? 1 : -1;
+                }
+                return moment(a.registered) < moment(b.registered) ? 1 : -1;
+              }).map((props) => (
               // eslint-disable-next-line react/prop-types
-              <IntervenantListItem key={props.id} {...props} />
-            ))}
+                <IntervenantListItem key={props.id} {...props} />
+              ))}
+          </>
+          )}
         </Tbody>
       </Table>
     </>
   );
 };
 
-const IntervenantList = (props) => (
-  <IntervenantProvider baseUrl="https://team.momji.fr/api/v2/static/employees">
-    <IntervenantListComponent {...props} />
-  </IntervenantProvider>
-);
-
-export default IntervenantList;
+export default IntervenantListComponent;
