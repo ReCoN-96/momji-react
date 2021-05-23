@@ -22,11 +22,15 @@ const IntervenantEditPage = ({ match }) => {
 
   const Intervenant = records.find((data) => data.id === match.params.id);
 
+  const onSubmit = (editedIntervenant) => {
+    console.log(editedIntervenant);
+  };
+
   return (
     <Container maxWidth="container.lg" centerContent>
       {hasErrored && error}
       {isLoading && 'Loading...'}
-      {success && <IntervenantForm {...Intervenant} />}
+      {success && <IntervenantForm {...Intervenant} onSubmit={onSubmit} />}
     </Container>
   );
 };

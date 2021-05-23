@@ -14,7 +14,7 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 
 const IntervenantForm = ({
-  profile, email, address, isActive,
+  profile, email, address, isActive, onSubmit,
 }) => {
   const {
     register, handleSubmit, control,
@@ -28,11 +28,11 @@ const IntervenantForm = ({
     },
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onFormSubmit = (data) => onSubmit(data);
 
   return (
     <Box w="50%" p={6} border="1px" borderColor="gray.200" borderRadius="40px">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onFormSubmit)}>
         <FormControl>
           <FormLabel>First name</FormLabel>
           <Input mb={2} type="text" defaultValue={profile?.firstName || ''} {...register('profile.firstName', { required: true })} />
