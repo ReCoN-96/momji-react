@@ -7,7 +7,7 @@ export const REQUEST_STATUS = {
   SUCCESS: 'success',
   ERROR: 'error',
 };
-const requestReducer = (state, action) => {
+export const requestReducer = (state, action) => {
   switch (action.type) {
     case GET_ALL_SUCCESS: {
       return {

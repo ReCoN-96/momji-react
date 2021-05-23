@@ -28,8 +28,9 @@ const IntervenantForm = ({
     },
   });
 
-  const onFormSubmit = (data) => onSubmit(data);
-
+  const onFormSubmit = (data) => {
+    onSubmit(data);
+  };
   return (
     <Box w="50%" p={6} border="1px" borderColor="gray.200" borderRadius="40px">
       <form onSubmit={handleSubmit(onFormSubmit)}>
