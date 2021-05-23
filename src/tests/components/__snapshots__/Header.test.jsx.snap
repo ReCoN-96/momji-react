@@ -1,22 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render Header correctly 1`] = `
-<div
-  className="css-8dcter"
->
-  <a
-    href="/"
-    onClick={[Function]}
+<Menu>
+  <Box
+    alignItems="center"
+    boxSize="100%"
+    display="flex"
+    justifyContent="center"
+    p={10}
   >
-    <img
-      alt="Momji"
-      className="chakra-image__placeholder css-0"
-    />
-  </a>
-  <h2
-    className="chakra-heading css-1y6ic72"
-  >
-    Test Technique Momji
-  </h2>
-</div>
+    <Link
+      to="/"
+    >
+      <Image
+        alt="Momji"
+        src="https://www.momji.fr/sites/default/files/logo/SA_to_Momji_80px_1.png"
+      />
+    </Link>
+    <Heading
+      ml={10}
+    >
+      Test Technique Momji
+    </Heading>
+  </Box>
+</Menu>
 `;

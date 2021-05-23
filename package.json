@@ -15,8 +15,8 @@
     "history": "^5.0.0",
     "moment": "^2.29.1",
     "prop-types": "^15.7.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "16",
+    "react-dom": "16",
     "react-hook-form": "^7.6.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -34,6 +34,11 @@
       "react-app/jest"
     ]
   },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -47,13 +52,15 @@
     ]
   },
   "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.2",
     "eslint": "^7.2.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "prettier": "2.3.0",
-    "react-test-renderer": "^17.0.2"
+    "prettier": "2.3.0"
   }
 }
